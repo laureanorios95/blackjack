@@ -10,11 +10,7 @@ This Blackjack game is a simple yet complete implementation of the popular casin
 
 - Complete Blackjack game logic
 - Command-line interface
-- Computer dealer with configurable AI
-- Betting system
-- Game statistics tracking
-- Multiple player support
-- Configurable rule variations
+- Computer dealer
 
 ## Installation
 
@@ -35,15 +31,6 @@ blackjack
 go run github.com/laureanorios95/blackjack
 ```
 
-### Command-line Flags
-
-```bash
-blackjack -decks=3       # Play with 3 decks
-blackjack -players=2     # Play with 2 players
-blackjack -stand=17      # Dealer stands on 17
-blackjack -blackjack=3:2 # Blackjack pays 3:2
-```
-
 ## Game Rules
 
 - The goal is to have a hand value closer to 21 than the dealer without going over
@@ -51,13 +38,11 @@ blackjack -blackjack=3:2 # Blackjack pays 3:2
 - Face cards (Jack, Queen, King) are worth 10
 - Aces are worth 1 or 11, whichever is more favorable
 - Dealer must hit until they have at least 17
-- Blackjack (an Ace and a 10-value card) pays 3:2
 
 ## Example Game
 
 ```
 Welcome to Blackjack!
-Starting with $100
 
 Your cards: [♥10 ♦5]
 Dealer shows: [♣K]
@@ -72,69 +57,13 @@ Dealer shows: [♣K]
 Your final hand: [♥10 ♦5 ♠4] (Value: 19)
 Dealer's hand: [♣K ♠7] (Value: 17)
 
-You win! +$10
-Current balance: $110
-
 Deal again? (y/n): 
-```
-
-## Project Structure
-
-```
-blackjack/
-├── main.go              # Entry point
-├── game/                # Game logic
-│   ├── game.go          # Core game functionality
-│   ├── player.go        # Player implementation
-│   └── dealer.go        # Dealer AI implementation
-├── ui/                  # User interface
-│   └── terminal.go      # Terminal UI implementation
-├── rules/               # Game rules
-│   └── rules.go         # Rule variations and configurations
-└── util/                # Utility functions
-    └── util.go          # Helper functions
 ```
 
 ## Dependencies
 
 This project uses:
 - [github.com/laureanorios95/deck](https://github.com/laureanorios95/deck) - Card deck manipulation library
-
-## Advanced Usage
-
-### Custom Rule Sets
-
-```go
-import "github.com/laureanorios95/blackjack/rules"
-
-// Create a European Blackjack ruleset
-europeanRules := rules.New(
-    rules.WithDealerPeek(false),
-    rules.WithSurrender(false),
-    rules.WithBlackjackPayout(3, 2),
-)
-
-game := blackjack.NewGame(europeanRules)
-```
-
-### Creating a Custom UI
-
-```go
-import "github.com/laureanorios95/blackjack/ui"
-
-// Implement the UI interface
-type MyCustomUI struct {
-    // Custom fields
-}
-
-// Implement required methods
-func (ui *MyCustomUI) DisplayHand(hand []deck.Card) {
-    // Custom display logic
-}
-
-// Use your custom UI
-game := blackjack.NewGame(rules.Default(), &MyCustomUI{})
-```
 
 ## Contributing
 
